@@ -22,6 +22,7 @@ When this codec is used to decode the input, you may pass the following options:
 - ``endpoint`` - always required.
 - ``username`` - optional.
 - ``password`` - optional.
+- ``decorate_events`` - will add avro schema metadata to the event.
 
 If the input stream is binary encoded, you should use the ``ByteArrayDeserializer``
 in the Kafka input config.
