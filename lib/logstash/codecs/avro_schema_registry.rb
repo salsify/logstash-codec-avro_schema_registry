@@ -223,7 +223,7 @@ class LogStash::Codecs::AvroSchemaRegistry < LogStash::Codecs::Base
         datum_reader = Avro::IO::DatumReader.new(schema)
         event = LogStash::Event.new(datum_reader.read(decoder))
         if @decorate_events
-          decorate_event(event, schema)
+          decorate_event(event, schema, schema_id)
         end
         yield event
       end
@@ -250,7 +250,8 @@ class LogStash::Codecs::AvroSchemaRegistry < LogStash::Codecs::Base
   end
 
   private
-  def decorate_event(event, schema)
+  def decorate_event(event, schema, schema_id)
+    event.set("[@metadata][avro][schema_id]", schema_id)
     event.set("[@metadata][avro][type]", schema.type)
     if schema.is_a?(Avro::Schema::NamedSchema)
       event.set("[@metadata][avro][name]", schema.name)
