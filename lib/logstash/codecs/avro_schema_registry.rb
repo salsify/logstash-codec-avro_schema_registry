@@ -1,5 +1,6 @@
 # encoding: utf-8
 require "avro"
+require "avro-patches"
 require "open-uri"
 require "schema_registry"
 require "schema_registry/client"
